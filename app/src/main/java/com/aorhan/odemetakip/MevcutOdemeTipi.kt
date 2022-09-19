@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,17 +34,21 @@ class MevcutOdemeTipi : AppCompatActivity() {
         val odemeTipiId = intent.getIntExtra("odemeTipiId", -1)
 
         odemeTipi = odemeTipiIslemleri.odemeTipiGetir(odemeTipiId)
+
+
         binding.tvMevcutOdemeTipiAdi.setText(odemeTipi!!.OdemeTipiAdi)
         binding.tvMevcutOdemePeriyod.setText(odemeTipi!!.Periyod)
         binding.tvMevcutOdemePeriyodSuresi.setText(odemeTipi!!.PeriyodSuresi.toString())
 
-        odemeListesi = odemeIslemleri.tumOdemeTiplerineGoreOdemeleriGetir(odemeTipiId)
+        odemeListesi = odemeIslemleri.OdemeTiplerineGoreOdemeleriGetir(odemeTipi!!.Id)
 
         val lm = LinearLayoutManager(this)
         lm.orientation = LinearLayoutManager.VERTICAL
         binding.rvMevcutOdemeler.layoutManager = lm
         binding.rvMevcutOdemeler.addItemDecoration(DividerItemDecoration(this,lm.orientation))
+
         binding.rvMevcutOdemeler.adapter = OdemeAdapter(this, odemeListesi, this::itemOnClick)
+        Toast.makeText(this,odemeListesi.size.toString(),Toast.LENGTH_LONG).show()
     }
 
     fun btnDuzenle_OnClick(view: View) {

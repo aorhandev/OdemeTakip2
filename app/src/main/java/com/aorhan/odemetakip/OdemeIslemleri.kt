@@ -106,18 +106,18 @@ class OdemeIslemleri(context: Context) {
         return odeme
     }
 
-    private fun tumOdemeTiplerineGoreOdemeleriGetirSorgu(id: Int): Cursor {
+    private fun OdemeTiplerineGoreOdemeleriGetirSorgu(id: Int?): Cursor {
         var sorgu = "Select * from  Odemeler where OdemeTipiId= ?"
         return dbOdemeIslemleri!!.rawQuery(sorgu, arrayOf(id.toString()))
     }
 
 
     @SuppressLint("Range")
-    fun tumOdemeTiplerineGoreOdemeleriGetir(id: Int): ArrayList<Odeme> {
+    fun OdemeTiplerineGoreOdemeleriGetir(id: Int?): ArrayList<Odeme> {
         val odemeListesi: ArrayList<Odeme> = ArrayList()
         var odeme: Odeme
         open()
-        val c: Cursor = tumOdemeTiplerineGoreOdemeleriGetirSorgu(id)
+        val c: Cursor = OdemeTiplerineGoreOdemeleriGetirSorgu(id)
         if (c.moveToFirst()) {
             do {
                 odeme = Odeme()

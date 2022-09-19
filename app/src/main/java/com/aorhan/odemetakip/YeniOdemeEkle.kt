@@ -36,7 +36,7 @@ class YeniOdemeEkle : AppCompatActivity() {
     }
 
     fun btnOdemeKaydet_OnClick(view: View) {
-        // odeme!!.OdemeTipiId = odemeTipiId
+        odeme!!.OdemeTipiId = odemeTipi!!.Id
         odeme!!.OdemeAdi = binding.editOAd.text.toString()
         odeme!!.Tutar = binding.editOTutar.text.toString()
 
